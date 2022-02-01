@@ -1,72 +1,97 @@
-#include <iostream>
-#include<string>
-#include <vector>
-using namespace std;
-class Node{
+struct Node {
 public:
     int data;
-    Node*next;
-    Node(int data){
+    Node* next;
+    Node(int data) {
         this->data = data;
         next = nullptr;
     }
 };
-void insert_at_tail(Node* &head, int value){
-    Node* new_node = new Node(value);
-    if (head == nullptr){
+class LinkedList {
+public:
+    Node* head = nullptr;
+    void insert_at_the_end(int data) {
+        if (head == nullptr) {
+            Node* new_node = new Node(data);
+            head = new_node;
+            return;
+
+        }
+        Node* new_node = new Node(data);
+        Node* current = head;
+        while (current->next) {
+            current = current->next;
+        }
+        current->next = new_node;
+    }
+    void insert_at_the_head(int data) {
+        Node* new_node = new Node(data);
+        if (head == nullptr) {
+            head = new_node;
+            return;
+        }
+        new_node->next = head;
         head = new_node;
-        return;
     }
-    Node*temp = head;
-    while (temp->next!=nullptr){
-        temp = temp->next;
+    int get_element(int ind) {
+        Node* current = head;
+        int count = 0;
+        while (count < ind - 1) {
+            current = current->next;
+            count++;
+        }
+        return current->data;
+
     }
-    temp->next = new_node;
-}
-void insert_at_head(Node* &head, int value){
-    Node * new_node = new Node(value);
-    new_node->next = head;
-    head = new_node;
-}
-int get_value_at_index(Node* &head, int key){
-    Node* current = head;
-    int count = 0;
-    key = key-1;
-    while (count < key){
-        current = current->next;
-        count ++;
+    void iteratvie_reverse() {
+        Node* next = nullptr;
+        Node* prev = nullptr;
+        Node* current = head;
+        while (current) {
+            next = current->next;
+            current->next = prev;
+            prev = current;
+            current = next;
+        }
+        head = prev;
     }
-    return current->data;
-}
-void reverse(Node* &head){
-    Node * prev = nullptr;
-    Node * current = head;
-    Node*Next = nullptr;
-    while (current != nullptr){
-        Next = current->next;
+    void solve(Node* prev, Node* current) {
+        if (current == nullptr) {
+            head = prev;
+            return;
+        }
+        Node* next = current->next;
         current->next = prev;
         prev = current;
-        current = Next;
-    }
-    head = prev;
-}
-void display(Node* head){
-    Node*current = head;
-    while (current != nullptr){
-        cout << current->data << " ";
-        current = current->next;
-    }
-    cout << endl;
-}
+        solve(prev, next);
 
+    }
+    void recursive_reverse() {
+        Node* current = head;
+        Node* prev = nullptr;
+        solve(prev, current);
+    }
+    void print() {
+        Node* current = head;
+        while (current) {
+            cout << current->data << " ";
+            current = current->next;
+        }
+        cout << endl;
+
+    }
+
+};
 int main() {
-    Node*head = nullptr;
-    insert_at_tail(head, 1);
-    insert_at_tail(head, 2);
-    insert_at_tail(head, 10);
-    insert_at_head(head, 12);
-    display(head);
-    reverse(head);
-    display(head);
+    LinkedList obj;
+    obj.insert_at_the_end(10);
+    obj.insert_at_the_end(20);
+    obj.insert_at_the_end(38);
+    obj.insert_at_the_head(5);
+    obj.print();
+    obj.recursive_reverse();
+    obj.print();
+    
+    
     return 0;
 }
