@@ -1,3 +1,4 @@
+//time: O(n) and space: O(1)
 public:
     ListNode *detectCycle(ListNode *head) {
         if (head == nullptr || head->next == nullptr){
