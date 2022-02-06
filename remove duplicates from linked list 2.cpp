@@ -1,4 +1,4 @@
-//time: O(n) and space: O(n)
+//time: O(n) and space: O(1) since qe are not allocating extra space
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
@@ -14,6 +14,7 @@ public:
                 deleteNode = current;
             }
             else {
+                //connecting prev to non duplicate element
                 prev->next = current;
                 prev = current;
                 
