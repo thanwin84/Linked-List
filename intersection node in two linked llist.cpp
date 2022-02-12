@@ -60,3 +60,25 @@ public:
 //O(m - n) : we have to skip this much step in longest linked list
 //O(m): to find out the intersection node
 //O(n) + O(m - n) + O(m) -> O(n + m) and space: O(1) since we are not using any extra space to store any node;
+//*******optimized approach*****
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        if (headA == nullptr || headB == nullptr){
+            return nullptr;
+        }
+        ListNode* dummy1 = headA;
+        ListNode * dummy2 = headB;
+        //if we get same node, we will stop the loop
+        while (dummy1 != dummy2){
+            // the moment we reach the end of linked list, we have to reset head to another linked list
+            dummy1 = dummy1 == nullptr ? headB: dummy1->next;
+            dummy2 = dummy2 == nullptr ? headA: dummy2->next;
+        }
+        return dummy1;
+        
+    }
+};
+//time: O(n + m) and space: O(1)
+//explaination vidoe link: https://youtu.be/u4FWXfgS8jw
+
