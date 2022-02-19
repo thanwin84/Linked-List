@@ -38,6 +38,8 @@ public:
         Node* current = reversed_head;
         int carry = 1;
         Node* prev = nullptr;
+        // add +1 to the current pointer
+        // move current pointer by one step each time until carry is equal to zero
         while (current) {
             current->data += carry;
             if (current->data >= 10) {
@@ -45,12 +47,15 @@ public:
                 current->data = 0;
             }
             else {
+                // if carry is 0, we don't need to move forward
                 carry = 0;
                 break;
             }
             prev = current;
             current = current->next;
         }
+        // If we're still left with carry after treversing the list
+        // we have to add new node at the end of linked list
         if (carry) {
             Node* new_node = new Node(1);
             prev->next = new_node;
