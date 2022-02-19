@@ -45,6 +45,7 @@ public:
         ListNode* current = l1;
         ListNode* current2 = l2;
         ListNode* prev = nullptr;
+         // keep adding the both linked list 
         while (current && current2) {
             int first = current->val;
             int second = current2->val;
@@ -61,15 +62,19 @@ public:
             current = current->next;
             current2 = current2->next;
         }
-        //if we have same length
+        //if we are left with same lenght and carry 0
+         //return either of two lists
         if (!current && !current2 && carry == 0) {
             return l1;
         }
+         // if we still have carry and same lenght, add new node to any linked list
+         // if we have different length, keep adding carry to the max lenght of linked list until carry becomes zero
         if (carry) {
             if (!current && !current2) {
                 prev->next = new ListNode(carry);
                 return l1;
             }
+             // if current is max
             else if (current) {
                 make_carry_zero(current, carry);
                 return l1;
@@ -79,7 +84,7 @@ public:
                 return l2;
             }
         }
-        //if carry is 0, return which linked list is long
+        //if carry is 0, return max lenght of linked list
         if (carry == 0) {
             if (current) {
                 return l1;
