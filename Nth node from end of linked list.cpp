@@ -32,7 +32,7 @@ int getNthFromLast(Node *head, int n)
 // algorithm: take two pointers(first_pointer and second_pointer)
 // treverse n nodes with first pointer(we only have to traverse n -1 times to reach at nth position).
 // then treverse first pointer and second pointer simulteniously until the first_pointer.next is not null. 
-// When second pointer.next becomes null, second pointer will reach at the desire position
+// When second pointer.next becomes null, second pointer will reach at the desired position
 // time: O(n) and space: O(1)
 // in the worst case we have to traverse the linked list only once
 int getNthFromLast(Node *head, int n)
