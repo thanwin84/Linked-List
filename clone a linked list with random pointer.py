@@ -19,6 +19,7 @@ class Solution:
             front = current.next
             # creating copy node
             copy = Node(current.val)
+            # link the copy node right next to orinal node
             current.next = copy
             copy.next = front
             current = front
