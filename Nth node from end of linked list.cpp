@@ -1,4 +1,5 @@
 // time: O(n) and space: O(1)
+// in the worst case we have to traverse the whole array twice
 Node * reverse(Node *head){
     Node * current = head;
     Node *prev = nullptr;
