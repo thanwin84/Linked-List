@@ -1,4 +1,5 @@
 // time: O(n) and space: O(26)
+
 class Solution {
 public:
 	string FirstNonRepeating(string A) {
